@@ -1,0 +1,114 @@
+
+body{font: 10px/10px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  
+}
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-weight:bold;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: auto;
+    padding: 0 10px;
+ 
+}
+.the-fieldset {
+    border: 1px solid #e0e0e0;
+    padding: 4px;
+}
+.bottomspace{
+   margin-bottom:6px;}
+
+div#myBlueDiv {
+    flex-basis:200px;
+}
+
+input[type=button]
+{
+    font-size:x-large;
+}
+tr {
+   line-height: 15px;
+   min-height: 15px;
+   height: 15px;
+}
+
+
+/*footer*/
+ footer {
+        position: relative;
+        height: 30px;
+        width: 100%;
+        text-align: left;
+    }
+ p.copyright {
+        position: absolute;
+        width: 100%;
+        color: #000000;
+             font-size: 0.7em;
+        text-align: center;
+        bottom:0;
+    }
+    .contentouter{
+
+        text-align: left;  
+        background-color: white;
+        padding: 1px;
+      
+    }
+    .content{
+    
+        text-align: left;  
+        background-color: rgb(198, 200, 214);
+        padding: 1px;
+      
+    }
+
+    .tblColLbl
+    {
+    
+         font-weight: bold;
+    
+    }
+    .button {
+        border: solid;
+         border-width: 1px;
+      border-color: rgb(0, 38, 255);
+    
+      padding: 9px;
+      text-align: center;
+      text-decoration-color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 1px 1px;
+      cursor: pointer;
+    }
+    
+    .button1 {border-radius: 2px;}
+    .button2 {border-radius: 4px;}
+    .button3 {border-radius: 8px;}
+    .button4 {border-radius: 12px;}
+    .button5 {border-radius: 85%;}
+
+
+.alertsContainer .alertsRow {
+    border: 1px solid #ffc549;
+}
+.alertsContainer.alertsRow.success.iconpanel {
+    background:#ffc549;
+    color: #fff;
+}
+.alertsContainer .alertsRow .messagepanel {
+    color: #000;
+    background: #fff;
+}
+.alertsContainer .alertsRow .closeicon {
+    color: #000;
+}
+.alertsContainer .alertsRow .closeicon a {
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+}

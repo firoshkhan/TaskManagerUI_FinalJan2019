@@ -1,0 +1,134 @@
+<script>
+    btnClick= function () {
+        alert('ss');
+            this.router.navigate(['/user']);
+    };
+    </script>
+    <div class="container" >
+        <br>
+        <div class="card">       
+                <div class="card-header page-header">
+                 <h4>User</h4>
+                </div>
+
+                <div class="card-body"> 
+                    <form class="form-horizontal" (ngSubmit)="f.form.valid && onSubmit()"  #f="ngForm" novalidate>
+                
+                            <div class="form-group d-flex">
+                                <div  class="col-sm-3"><label class="control-label" for="Task">1First Name:</label>
+                                </div> 
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" [(ngModel)]="Item.FirstName"
+                                    placeholder="Enter First Name" name="FirstName" #FirstName="ngModel"
+                                    [ngClass]="{ 'is-invalid': f.submitted && FirstName.invalid }"
+                                    required  />
+                                    <div *ngIf="f.submitted && FirstName.invalid" class="invalid-feedback">
+                                        <div *ngIf="FirstName.errors.required">First Name is required</div>
+                                    </div>
+                                </div>                      
+                            </div>
+
+                            <div class="form-group d-flex">
+                                    <div  class="col-sm-3"><label class="control-label" for="LastName">Last Name:</label></div> 
+                                      <div class="col-sm-4">
+                                          <input type="text" class="form-control" [(ngModel)]="Item.LastName"
+                                           placeholder="Enter Last Name" name="LastName" #LastName="ngModel"
+                                           [ngClass]="{ 'is-invalid': f.submitted && LastName.invalid }"
+                                           required  />
+                                           <div *ngIf="f.submitted && LastName.invalid" class="invalid-feedback">
+                                            <div *ngIf="LastName.errors.required">Last Name is required</div>
+                                            </div>
+                                      </div>
+                            </div>
+
+                                    <div class="form-group d-flex">
+                                            <div  class="col-sm-3"><label class="control-label" for="Task">Employee ID</label>
+                                            </div> 
+                                              <div class="col-sm-4">
+                                                   <input type="text" class="form-control" [(ngModel)]="Item.EmpId"
+                                                   placeholder="Enter Employee Id" name="EmpId" #EmpId="ngModel"
+                                                   [ngClass]="{ 'is-invalid': f.submitted && EmpId.invalid }"
+                                                   required  />
+                                                   <div *ngIf="f.submitted && EmpId.invalid" class="invalid-feedback">
+                                                    <div *ngIf="EmpId.errors.required"> Employee Id is required</div>
+                                                    </div>
+                                              </div>
+                                    </div>
+                            
+                          <div class="form-group d-flex"> 
+                            <div class="col-sm-offset-2 col-sm-8">
+                             <!-- <button  (click)="AddOrUpdate()"  name="Add" class="btn btn-primary btn-sm" [disabled]="!f.valid"  >{{btnAddCaption}} </button> &nbsp; -->
+                             <button  type="submit"  name="Add" class="btn btn-primary btn-sm"  >{{btnAddCaption}} </button> &nbsp; 
+                               <button type="reset"  (click)="Reset();" name="Reset"  class="btn btn-primary btn-sm"> Reset </button>
+                              </div>
+                          </div>
+                    
+                
+                    </form>
+                </div>
+
+                <div>
+                        <span >   {{msg}}</span>  
+                     
+                </div>
+  
+<hr>
+        <div class="row"> 
+             <div class="col-md-1">
+                &nbsp;
+        
+             </div>
+            <div class="col-md-4">
+                <input type="text" name ="Search" class="form-control" [(ngModel)]="userFilter.FirstName" placeholder="Search by First Name..."
+                id="FilterFirstName" >
+            </div>
+            <div class="col-md-6">
+                <div>Sort By
+                    <button (click)="Sort('FirstName')" class="btn btn-primary btn-sm">First Name</button>&nbsp;
+                    <button (click)="Sort('LastName')" class="btn btn-primary btn-sm">Last Name</button>&nbsp;
+                    <button (click)="Sort('EmpId')" class="btn btn-primary btn-sm">ID</button>&nbsp;
+                </div>
+            </div>
+        </div>
+        <HR>
+  
+        <br> 
+            <ul class="list-group list-unstyled">
+                <li *ngFor="let item of user  | orderBy:order:false:true | filterBy: userFilter; let i = index"> 
+        
+                <div class="row">           
+                   <div class="col-md-3">
+                    <span >First Name:</span>     
+                    <span class="label lblcolored">{{ item.FirstName }}</span>
+                    </div>   
+                    <div  class="col-md-3">                       
+                    <span>Last Name:</span>     
+                    <span class="label lblcolored">{{ item.LastName }}</span>
+                    </div>   
+                    <div  class="col-md-3">
+                    <span>Employee Id:</span>   
+                    <span class="label lblcolored">{{ item.EmpId }}</span>
+                    </div>   
+
+                   
+
+                    <div  class="col-md-3">
+
+                        <span><button (click)="ViewUser(item)" class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                        </span>
+                        <span><button (click)="Delete(item,i)" class="btn btn-secondary btn-sm">Delete</button>&nbsp;
+                        </span>
+
+                    </div>   
+                    <HR>
+                </div>
+                </li>
+            </ul>
+    
+
+
+    </div>
+   
+</div>
+  
+<div  class="sucessMsg" >{{msg}}</div>

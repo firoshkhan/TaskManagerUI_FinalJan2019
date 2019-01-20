@@ -1,0 +1,48 @@
+table 
+{
+
+    width: 500px;
+}
+.disabledcheck
+{
+    display:block;
+}
+.disabled {
+    pointer-events:none;
+    cursor: default;
+    background-color:rgb(190, 191, 199) }
+.cardbody
+{
+
+    margin-left: 50px;
+}
+.control-label{
+
+    text-align: left;  
+    align-self: left;
+    align-content: left;
+
+    
+}
+.button {
+    border: solid;
+     border-width: 1px;
+  border-color: rgb(0, 38, 255);
+
+  padding: 9px;
+  text-align: center;
+  text-decoration-color: white;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 1px 1px;
+  cursor: pointer;
+}
+
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {border-radius: 85%;}
+
+

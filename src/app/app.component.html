@@ -1,0 +1,27 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+    <h1>
+        {{ title }}
+      </h1>
+
+      <nav class="navbar  navbar-expand-sm text-light bg-dark" >
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+              <!--final-->
+              <li class="active"><a [routerLink]="'/project'" >Add Project</a></li>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <li><a [routerLink]="'/add'" >Add Task</a></li>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <li><a [routerLink]="'/user'" >Add User</a></li> 
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <li><a [routerLink]="'/view'" >View Task</a></li>
+               <!--final-->
+            </ul>
+          </div>
+        </nav>     
+
+ <router-outlet></router-outlet>
+</div>
+
+
+

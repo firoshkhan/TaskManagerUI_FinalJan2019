@@ -1,0 +1,229 @@
+<script>
+  btnClick= function () {
+     alert('ss');
+          this.router.navigate(['/project']);
+  };
+  </script>
+
+                        <!--model-->
+                        <ng-template #content let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Select Manager...</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                            <form>
+                              
+                              <div class=" d-flex ">
+          
+                                      <div  class="col-sm-10" >
+                                          <input type="text" name ="Search" class="form-control" [(ngModel)]="userFilter.FirstName" placeholder="Search by First Name..."
+                                          id="FilterFirstName" >
+                                    
+                                        <select size="10" [(ngModel)]="selected" name="User" class="form-control" >
+                                          <option  *ngFor="let item of user| orderBy:order:caseInsensitive:true | filterBy: userFilter; let i = index" [value]="item.UserId + ',' + item.FirstName + ' ' +  item.LastName"> {{item.FirstName}} &nbsp; {{item.LastName}} </option>
+                                        </select>  
+
+                                    
+                                      </div>
+                                    </div>
+          
+                             
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark" (click)="modal.close(selected)">Select</button>
+                            </div>
+                          </ng-template>
+                    <!--model-->
+                    
+  <div class="container " name="a"  style="width:1000">
+      <br>
+      <div class="card" name="a" style="width:100%">  
+         
+           
+            <div class="card-header page-header">
+                <h4>Add Project</h4>
+              </div>
+          <div class="card-body col-sm-12" name="a">
+
+             <form name ="form" class="form-horizontal"  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              
+                          <div class="form-group d-flex">
+                              <div  class="col-sm-1"><label class="control-label" for="Task">Project:</label>
+                              </div> 
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" [(ngModel)]="Item.ProjectName"
+                        placeholder="Enter Project Name" name="ProjectName" #ProjectName="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && ProjectName.invalid }"
+                        required  />
+                        <div *ngIf="f.submitted && ProjectName.invalid" class="invalid-feedback">
+                          Project Name is required 
+                        </div> 
+                                                           
+                             </div>
+                              
+                          </div><!--form-group d-flex-->
+
+                          <div class="form-group  d-flex ">
+                                  <div  class="col-sm-1">
+                                    &nbsp;
+                                  </div>
+                                  
+                                    <div class="col-sm-8 row">
+                                      <div> &nbsp; &nbsp;</div>
+                                      <div>
+                                        <label>
+                                          <input #checkDates id="checkDates" type="checkbox" ng-model="checkboxModel.value1" (change)="SetDate($event)" >&nbsp;Set Start and End Date
+                                        </label>
+                                     </div>
+                                     <div> &nbsp; &nbsp; </div>
+                                     
+                                      <div>
+                                        <input [disabled]="!checkDates.checked" name="StartDate" type="date" class="form-control" 
+                                        #StartDate="ngModel" CompareDates="EndDate" 
+                                       [ngModel]="Item.Startdate|date:'yyyy-MM-dd'" id="StartDate"   placeholder="Start date"   
+                                       (ngModelChange)="Item.Startdate = $event;compareTwoDates()"                            
+                                       />                             
+                                          <div style="color: red"  *ngIf="f.submitted && StartDate.touched && StartDate.errors   && StartDate.errors.DatesInvalid"  >                                     
+                                                  Start date  should not  be greater                                 
+                                                </div>
+                                       
+                                      </div>&nbsp;
+                                      <div>                                
+                                        <input [disabled]="!checkDates.checked" name="EndDate" type="date" class="form-control"
+                                        #EndDate="ngModel" 
+                                        CompareDates="StartDate"     [ngModel]="Item.Enddate|date:'yyyy-MM-dd' "  id="EndDate"  placeholder="End date"  
+                                        (ngModelChange)="Item.Enddate = $event;compareTwoDates()" 
+                                        />
+
+                                        <div *ngIf="f.submitted && EndDate.touched && EndDate.errors && EndDate.errors.DatesInvalid" style="color: red"  >                                     
+                                            End date  should not  be lesser                                         
+                                          </div>
+                                      </div>&nbsp;
+                                      <!--<div *ngIf="EndDate.errors.DatesInvalid" class="invalid-feedback" >  --> 
+                                     
+                                  </div>
+
+                          </div> <!--form-group date -->
+
+
+                          <div class="form-group d-flex">
+                            <div  class="col-sm-1"><label class="control-label" for="Task">Priority:</label>
+                            </div> 
+                            <div class="col-sm-4">                                                                
+                              <input name="Priority" #Priority (input)="Priority.value"   type="range" MIN="0" MAX="30" class="form-control" 
+                              [(ngModel)]="Item.Priority"   >                          
+                          
+                              <label for="Priority">Priority ({{ Priority.value }})</label>                            
+                        
+                            </div>
+                          </div>      <!--form-group d-flex -->                                            
+               
+                        <div class="form-group d-flex">
+                            <div  class="col-sm-1"><label class="control-label" for="Task">Manager:</label>
+                            </div> 
+                            <div class="col-sm-6 row">
+                                <div> &nbsp; &nbsp; &nbsp;</div>
+                              <div>
+                                <input name="Manager" type="text" class="form-control" [(ngModel)]="ProjMgrFirstandLastName"  id="EndDate" readonly  >
+                              </div>&nbsp;
+                              <div>
+                                <a class="button button5" role="button" (click)="open(content)" >Search</a>
+                               </div>
+                            </div>
+                        </div> <!--form-group d-flex -->   
+                        
+                        
+                        <div class="form-group d-flex"> 
+                          <div class="col-sm-offset-2 col-sm-8">                          
+                            <!--<button  (click)="AddOrUpdate()"  name="Add" class="btn btn-primary btn-sm" [disabled]="!f.valid"  >{{btnAddCaption}} </button> &nbsp; -->
+                          <button type="submit"  name="Add" class="btn btn-primary btn-sm"  >{{btnAddCaption}} </button> &nbsp; 
+                            <button type="reset"  (click)="Reset();" name="Reset" class="btn btn-primary btn-sm"> Reset </button>
+                          </div>
+                        </div><!--form-group d-flex -->                      
+               </form>
+              <div>
+                      <span >   {{msg}}</span>                     
+              </div>
+
+<hr>
+    <div class="row"> 
+      <div class="col-md-1">
+        &nbsp;
+
+      </div>
+      <div class="col-md-4">
+                  <input type="text" name ="Search" class="form-control" [(ngModel)]="ProjectFilter.ProjectName" placeholder="Search by Project Name..."
+              id="FilterProjectName" >
+      </div>
+      <div class="col-md-6">
+              Sort By
+                <button (click)="Sort('Startdate')" class="btn btn-primary btn-sm">Start Date</button>&nbsp;
+                <button (click)="Sort('Enddate')" class="btn btn-primary btn-sm">End Date</button>&nbsp;
+                <button (click)="Sort('Priority')" class="btn btn-primary btn-sm">Priority</button>&nbsp;
+                <button (click)="Sort('Completed')" class="btn btn-primary btn-sm">Completed</button>&nbsp;
+      </div>
+    </div>  <!--row --> 
+
+   <br>
+          <ul class="list-group list-unstyled">
+ 
+              <li *ngFor="let item of project  | orderBy:order:false:true | 
+              filterBy: ProjectFilter; let i = index"> 
+           
+            
+                 <div class="row contentouter">
+                  <div class="col-md-2 content">
+                  <span class="tblColLbl">Project:</span>     
+                  <span class="label ">{{ item.ProjectName }}</span>
+                  </div>   
+                  <div  class="col-md-1 content">                       
+                  <span class="tblColLbl">#Tasks:</span>     
+                  <span class="label ">{{ item.TotNoofTasks }}</span>
+                  </div>   
+                  <div  class="col-md-2 content">
+                  <span class="tblColLbl">Completed:</span>   
+                  <span class="label ">{{ item.NoofTasksCompleted }}</span>
+                  </div>  
+                  <div  class="col-md-2 content"> 
+                  <span class="tblColLbl">Start Date:</span>   
+                  <span class="label ">{{ item.Startdate | date:'mediumDate' }}</span>
+                  </div>
+                  <div  class="col-md-2 content">   
+                  <span class="tblColLbl">End Date:</span>   
+                  <span class="label ">{{ item.Enddate  | date:'mediumDate'}}</span>
+                  </div>  
+                  <div  class="col-md-1 content"> 
+                  <span class="tblColLbl">Priority:</span>   
+                  <span class="label ">{{ item.Priority }}</span>
+                  </div>                 
+
+                  <div  class="col-md-2 content">
+
+                    <span><button (click)="ViewProject(item)" class="btn btn-primary btn-sm">Update</button>&nbsp;
+                    </span>
+                    <span><button (click)="Delete(item,i)" class="btn btn-secondary btn-sm">Suspend</button>&nbsp;
+                    </span>
+                
+                </div>   
+                  </div>
+              </li>
+          </ul>
+
+
+
+
+
+    
+
+    </div> 
+  
+  </div>
+  
+</div>
+
+
+{{StartDate.errors}}

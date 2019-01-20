@@ -1,0 +1,70 @@
+<div class="container" >
+    <br>
+    <div class="card">
+    
+        <div class="card-header page-header">
+          <h4>Update Task</h4>
+        </div>
+        <div class="card-body">
+          
+            <form class="form-horizontal" >
+                
+                <div class="form-group d-flex">
+                <div  class="col-sm-2"><label class="control-label" for="Task">Task:</label></div> 
+                  <div class="col-sm-4">
+                    <input type="text" name ="TaskName" class="form-control" [(ngModel)]="Item.TaskName"  id="Task" >
+                  
+                  </div>
+                </div>
+               
+                <div class="form-group d-flex">
+                  <div  class="col-sm-2"> <label class="control-label " for="Priority">Priority:</label></div>
+                <div class="col-sm-4"> 
+                  <input type="Range" #Priority (input)="Priority.value"  name ="Priority" MIN="1" MAX="30" step="1" value="0" class="form-control"  [(ngModel)]="Item.Priority"  id="Priority" placeholder="Enter password">
+                  <label for="Priority">Priority ({{ Priority.value }})</label>
+                </div>
+              </div>
+              <div class="form-group d-flex">
+                <div  class="col-sm-2"><label class="control-label " for="ParentTask">Parent Task:</label></div>
+                <div class="col-sm-4">
+                  <select  [(ngModel)]="Item.TaskParentId" name ="ParentTask" class="form-control" >
+                    <option  *ngFor="let item of task" [value]="item.TaskId" ng-selected="Item.TaskParentId == item.TaskId"> {{item.TaskName}}</option>
+                  </select>  
+                                   
+                </div>
+              </div>
+              <div class="form-group  d-flex">
+                <div  class="col-sm-2"><label class="control-label " for="StartDate">Start Date:</label></div>
+                <div class="col-sm-4">
+                  <input name="StartDate" type="date"  class="form-control" (ngModelChange)="Item.Startdate = $event" 
+                   [ngModel]="Item.Startdate|date:'yyyy-MM-dd'"  id="StartDate"   placeholder="Enter task start date">
+                
+                </div>
+              </div>
+              <div class="form-group  d-flex">
+                  <div  class="col-sm-2"><label class="control-label " for="EndDate">End Date:</label></div>
+                  <div class="col-sm-4">
+                    <input name="EndDate" type="date" class="form-control" (ngModelChange)="Item.Enddate = $event"  
+                     [ngModel]="Item.Enddate|date:'yyyy-MM-dd'"  id="EndDate"  placeholder="Enter task end date">
+                  
+                  </div>
+                </div>
+              <div class="form-group d-flex"> 
+                <div class="col-sm-offset-2 col-sm-8">
+                
+                  <button (click)="Update()"  class="btn btn-default">Update</button> &nbsp;
+                
+                  
+                    <button (click)="_router.navigate(['/view']);"  class="btn btn-default">Cancel</button>
+                  </div>
+              </div>
+       
+    
+     </form>
+         
+        </div>
+      </div>
+
+ 
+
+</div>

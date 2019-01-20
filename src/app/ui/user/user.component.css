@@ -1,0 +1,64 @@
+
+body{font: 10px/10px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  
+}
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-weight:bold;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: auto;
+    padding: 0 10px;
+ 
+}
+.sucessMsg
+{
+
+color: green;
+background-color: bisque;
+}
+.the-fieldset {
+    border: 1px solid #e0e0e0;
+    padding: 4px;
+}
+.bottomspace{
+   margin-bottom:6px;}
+
+div#myBlueDiv {
+    flex-basis:200px;
+}
+
+input[type=button]
+{
+    font-size:x-large;
+}
+tr {
+   line-height: 15px;
+   min-height: 15px;
+   height: 15px;
+}
+
+
+/*footer*/
+ footer {
+        position: relative;
+        height: 30px;
+        width: 100%;
+        text-align: left;
+    }
+ p.copyright {
+        position: absolute;
+        width: 100%;
+        color: #000000;
+             font-size: 0.7em;
+        text-align: center;
+        bottom:0;
+    }
+
+    .lblcolored{
+        background-color:lightsteelblue; 
+        color: #000000;
+        width:50%;
+    }

@@ -1,0 +1,280 @@
+<script>
+    btnClick= function () {
+       alert('ss');
+            this.router.navigate(['/add']);
+    };
+
+
+    </script>
+    
+
+                      
+                      <!--model user-->
+                        <ng-template #usercontent let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Select User...</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                            <form>
+                              
+                              <div class=" d-flex ">
+          
+                                      <div  class="col-sm-10" >
+                                          <input type="text" name ="Search" class="form-control" [(ngModel)]="userFilter.FirstName" placeholder="Search by First Name..."
+                                          id="FilterFirstName" >
+                                    
+                                        <select size="10" [(ngModel)]="selected" name="User" class="form-control" >
+                                          <option  *ngFor="let item of user| orderBy:order:caseInsensitive:true | filterBy: userFilter; let i = index" [value]="item.UserId + ',' + item.FirstName + ' ' +  item.LastName"> {{item.FirstName}} &nbsp; {{item.LastName}} </option>
+                                        </select>  
+
+                                    
+                                      </div>
+                                    </div>
+          
+                             
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark" (click)="modal.close(selected)">Select</button>
+                            </div>
+                          </ng-template>
+                    <!--model-->
+
+
+                       <!--model project-->
+                       <ng-template #projectcontent let-modal>
+                        <div class="modal-header">
+                      f    <h4 class="modal-title" id="modal-basic-title">Select Project...</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                        <form>
+                          
+                          <div class=" d-flex ">
+      
+                                  <div  class="col-sm-10" >
+                                      <input type="text" name ="Search" class="form-control" [(ngModel)]="projectFilter.ProjectName" placeholder="Search by Project  Name..."
+                                      id="FilterProjectName" >
+                                
+                                    <select size="10" [(ngModel)]="selected" name="User" class="form-control" >
+                                      <option  *ngFor="let item of project| orderBy:order:caseInsensitive:true | filterBy: projectFilter; let i = index" [value]="item.ProjectId + ',' + item.ProjectName"> {{item.ProjectName}}  </option>
+                                    </select>  
+
+                                
+                                  </div>
+                                </div>
+      
+                         
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-dark" (click)="modal.close(selected)">Select</button>
+                        </div>
+                      </ng-template>
+                <!--model-->
+   <!--model parenttask-->
+   <ng-template #ParentTaskcontent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Select Parent Task...</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form>
+      
+      <div class=" d-flex ">
+
+              <div  class="col-sm-10" >
+                  <input type="text" name ="Search" class="form-control" [(ngModel)]="parentTaskFilter.TaskName" placeholder="Search by Task Name..."
+                  id="FilterTaskName" >
+            
+                <select size="10" [(ngModel)]="selected" name="parentTask" class="form-control" >
+                  <option  *ngFor="let item of parentTask| orderBy:order:caseInsensitive:true | filterBy: parentTaskFilter; let i = index" [value]="item.TaskId + ',' + item.TaskName "> {{item.TaskName}} </option>
+                </select>  
+
+            
+              </div>
+            </div>
+
+     
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close(selected)">Select</button>
+    </div>
+  </ng-template>
+<!--model-->
+
+<div class="container" >
+    <br>
+    <div class="card">
+    
+        <div class="card-header page-header">
+          <h4>Add Task</h4>
+        </div>
+
+        <div class="card-body cardbody">
+            <form name ="form" class="form-horizontal" 
+             (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <div class="form-group d-flex">
+                <div  class="col-sm-2 control-label"><label class="control-label" for="Task">Project : </label>
+                </div> 
+                <div>&nbsp;&nbsp;&nbsp;</div>
+                <div class="col-sm-6 row">
+                  <div>
+                    <input name="ProjectName" type="text" class="form-control" [(ngModel)]="ProjectName"  id="ProjectName" readonly
+                                        >
+                  </div>&nbsp;
+                  <div>
+                      <a id="projSearch"  class="button button5" role="button" (click)="openproject(projectcontent)" >Search</a>
+                    </div>
+                </div>
+            </div> <!--form-group d-flex -->   
+
+                <div class="form-group d-flex">
+                  <div  class="col-sm-2 control-label"><label class="control-label" for="Task">Task :</label>
+                  </div> 
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="Item.TaskName"
+                       placeholder="Enter Task"  name="TaskName" #TaskName="ngModel"
+                       [ngClass]="{ 'is-invalid': f.submitted && TaskName.invalid }"
+                       required  />
+                       <div *ngIf="f.submitted && TaskName.invalid" class="invalid-feedback">
+                        <div *ngIf="TaskName.errors.required">Task Name is required</div>
+                      </div>                
+                  </div>
+                </div>
+
+                <div class="form-group d-flex">
+                    <div  class="col-sm-1 control-label">                      
+                    </div> 
+                    <div class="col-sm-4 checkbox">                   
+                            <label>
+                              <input name="chkParentTask" #chkParentTask id="chkParentTask" (change)="IsParentTask($event)"  type="checkbox"  [(ngModel)]="Item.IsParentTask"  >&nbsp;Parent Task
+                            </label>                                    
+                    </div>
+                </div>
+
+
+                <div class="form-group d-flex">
+                    <div  class="col-sm-2 control-label"> <label class="control-label " for="Priority">Priority :</label></div>
+                  <div class="col-sm-4"> 
+                    <input [disabled]="chkParentTask.checked" name="Priority" #Priority (input)="Priority.value"   type="range" MIN="1" MAX="30" step="1" value="1" class="form-control" 
+                     [(ngModel)]="Item.Priority"   placeholder="Enter password">
+                    
+                 
+                    <label for="Priority">Priority ({{ Priority.value }})</label>
+                  </div>
+                </div>
+
+                <div class="form-group d-flex">
+                  <div  class="col-sm-2 control-label"><label class="control-label" for="ParentTask">Parent Task : </label>
+                  </div> 
+                  <div>&nbsp;&nbsp;&nbsp;</div>
+                  <div class="col-sm-6 row">
+                    <div>
+                      <input name="ParentTask" type="text" class="form-control" [(ngModel)]="ParentTaskName"  id="ParentTask" readonly >
+                    </div>&nbsp;
+                    <div>
+                        <a  id="userParentTask" class="button button5" role="button" (click)="openParentTask(ParentTaskcontent)" >Search</a>
+                      </div>
+                  </div>
+              </div> 
+                                
+                <div class="form-group d-flex col-sm-12 row">
+                    <div  class="col-sm-2  control-label"><label class="control-label " for="StartDate">Start Date :</label>
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+                    <div >
+                      <input [disabled]="chkParentTask.checked" name="StartDate"
+                       type="date" class="form-control" 
+                       #StartDate="ngModel" CompareDates="EndDate" 
+                       [ngModel]="Item.Startdate|date:'yyyy-MM-dd'"
+                       id="StartDate"  placeholder="Enter task start date"
+                       (ngModelChange)="Item.Startdate = $event;compareTwoDates()"
+                      />
+                    
+                      <div style="color: red"  *ngIf="f.submitted && StartDate.touched && StartDate.errors 
+                      && StartDate.errors.DatesInvalid"  >                                     
+                            Start  date  should not  be greater  that end  date                                    
+                          </div>
+                    </div>
+
+
+                    <div>&nbsp;&nbsp;&nbsp;</div>
+                    <div  class="control-label"><label class="control-label " for="EndDate">End Date:</label>
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;</div>
+
+                        <div >
+                      <input  [disabled]="chkParentTask.checked" name="EndDate" 
+                      type="date" class="form-control"
+                      #EndDate="ngModel"
+                      CompareDates="StartDate" 
+                       [ngModel]="Item.Enddate|date:'yyyy-MM-dd'" 
+                       id="EndDate"  placeholder="Enter task end date"
+                       (ngModelChange)="Item.Enddate = $event;compareTwoDates()"
+                       />                  
+                    
+                       <div *ngIf="f.submitted && EndDate.touched && EndDate.errors && EndDate.errors.DatesInvalid" style="color: red"  >                                     
+                          End  date  should not  be less than  start date                                         
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                
+
+
+
+
+                <div class="form-group d-flex">
+                    <div  class="col-sm-2 control-label"><label class="control-label" for="Task">User : </label>
+                    </div> 
+                    <div>&nbsp;&nbsp;&nbsp;</div>
+                    <div class="col-sm-6 row">
+                      <div>
+                        <input name="TaskUser" type="text" class="form-control" [(ngModel)]="UserFirstandLastName"  id="User" readonly >
+                      </div>&nbsp;
+                      <div>
+                          <a  id="userSearch"  class="button button5 " role="button" (click)="openuser(usercontent)"  >Search</a>
+                        </div>
+                    </div>
+                </div> <!--form-group d-flex -->   
+
+              <div class="form-group d-flex"> 
+            
+                    <div class="col-sm-4"></div>
+                  <div>
+                    <button type="submit"  name="AddUpdate" class="btn btn-primary btn-sm">{{btnAddCaption}} </button> &nbsp;
+                  </div>
+                    <div *ngIf="btnAddCaption  == 'Add'"> 
+                      <a    (click)="Reset()" name="Reset"  class="btn btn-primary btn-sm">Reset Task</a>
+                   
+                    </div>
+                    <div *ngIf="btnAddCaption  == 'Update'"> 
+                      <button (click)="_router.navigate(['/view']);"  name="Cancel"  class="btn btn-primary btn-sm"> Cancel</button>
+                    </div>
+                  
+              </div>
+        
+    
+     </form>
+         
+        </div>
+      </div>
+
+ 
+
+</div>
+
+{{msg}}
