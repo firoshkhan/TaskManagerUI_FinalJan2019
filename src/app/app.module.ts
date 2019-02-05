@@ -38,7 +38,8 @@ const appRoutes: Routes=[
    { path: 'modal', component:NgbdModalComponent},
    { path: 'modal1', component:NgbdModalBasic},
    { path: 'update/:id', component:UpdateComponent},
-   { path: 'add/:id', component:AddComponent}
+   { path: 'add/:id', component:AddComponent},
+   { path: 'add/:id/:mode', component:AddComponent}
   ] 
 
 @NgModule({

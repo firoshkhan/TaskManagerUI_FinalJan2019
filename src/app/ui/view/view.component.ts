@@ -109,6 +109,11 @@ export class ViewComponent implements OnInit {
      this._router.navigate(['add', task.TaskId]);
       
    }
+   View( task:Task)
+   {
+     this._router.navigate(['add', task.TaskId,'View']);
+      
+   }
    EndTask( task:Task)
    {
 console.log("FilterTaskName" );

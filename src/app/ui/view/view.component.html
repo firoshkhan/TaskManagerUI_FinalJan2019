@@ -114,10 +114,15 @@ btnClick= function () {
                             <span class="tblColLbl">Priority:</span>   
                             <span class="label ">{{ item.Priority }}</span>
                             </div>                 
-                          
-                                <button (click)="Edit(item)" class="btn btn-primary btn-sm">Edit</button>&nbsp;
-                                  <button (click)="EndTask(item)" class="btn btn-primary btn-sm">End Task</button>&nbsp;
+                            <div *ngIf="item.Status   == 'Completed'"> 
+                                <button (click)="View(item)" class="btn btn-primary btn-sm">View Task</button>&nbsp;
+                               </div>
+                            <div *ngIf="item.Status  != 'Completed'"> 
+                              <button (click)="Edit(item)" class="btn btn-primary btn-sm">Edit</button>&nbsp;
                             
+                            
+                              <button (click)="EndTask(item)" class="btn btn-primary btn-sm">End Task</button>&nbsp;
+                          </div>
                          
 
                              

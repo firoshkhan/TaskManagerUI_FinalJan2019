@@ -5,9 +5,7 @@ import { SharedService } from '../../services/shared.service';
 import { iif } from 'rxjs';
 import { isNullOrUndefined } from 'util';
 import { DatePipe } from '@angular/common';
-
 import { OrderPipe } from 'ngx-order-pipe';
-
 
 
 @Component({
@@ -23,6 +21,8 @@ export class UserComponent implements OnInit {
   UserId:number;
   order: string ;
   userFilter: any = { FirstName: '' };
+  public errorMsg;
+  error: Response;
   /*task:Task[];
   subtask:Task[];
   FilterTask:Task[];
@@ -38,23 +38,17 @@ export class UserComponent implements OnInit {
   constructor(private _service:SharedService, private orderPipe: OrderPipe,
     private _router: Router) { }
 
-
    ngOnInit() {
-
     this.Item=new User();
     this._service.GetAllUsers()
-    .subscribe(i=>{this.user=i; 
-        });
-   
+    .subscribe(i=>{this.user=i},(err) => {this.msg =err._body});    
    this.btnAddCaption="Add";
    this.order='FirstName';
   }
 
   onSubmit()
-   {
-  
-      this.AddOrUpdate();
-   
+   {  
+      this.AddOrUpdate();   
    }
 
   AddOrUpdate() 
@@ -66,30 +60,19 @@ export class UserComponent implements OnInit {
        
         this.Item.UserId=this.UserId;     
         this._service.EditUser(this.Item)
-        .subscribe(i=>this.user=i);   
+        .subscribe(i=>{this.user=i},(err) => {this.msg =err._body}); 
         this.msg="User updated  sucessfully !"
-        this.Reset();
+      //  this.Reset();
        // this.btnAddCaption="Add";
       }
 
     else
-      {
- 
-        console.log('EmpId  '+this.Item.EmpId);
-    this._service.AddUsers(this.Item)
-    .subscribe(i=>this.user=i); 
-    //this.ngOnInit();
-   this.msg="User added sucessfully !"
-         // this.Reset();
-
+      {      
+        this._service.AddUsers(this.Item)
+        .subscribe(i=>{this.user=i},(err) => {this.msg =err._body}); 
+        this.msg="New User Added Sucessfully !"    
       }
-
-     // this.Item.FirstName="";
-     // this.Item.LastName="";
-      //this.Item.EmployeeId="";
-     // this.UserId=null;
     
-
   }
   fetchData()
   {
@@ -97,7 +80,7 @@ export class UserComponent implements OnInit {
     this.Item=new User();
     this._service.GetAllUsers()
     .subscribe(i=>{this.user=i; 
-        });
+        },(err) => {this.msg =err._body});
   }
   ViewUser( User:User)
    {
@@ -107,37 +90,35 @@ export class UserComponent implements OnInit {
     this.Item.EmpId=User.EmpId;
     this.UserId=User.UserId;
     this.btnAddCaption="Update";
-    console.log('User id '+User.UserId);
-    // this._router.navigate(['update', task.TaskId]);
-
+ 
    }
 
    Delete(User:User,index)
    {
-    console.log('User id '+User.UserId);
-
-    console.log('index id '+index);
-    this._service.DeleteUser(User.UserId).subscribe(()=>{
-      //this.user.splice(index, 1);
-
-      this.fetchData();
-        }  );
-      
-      
+   
+    this._service.DeleteUser(User.UserId).subscribe
+    (()=>{this.fetchData()}, (err) => {this.msg =err._body}
+  
+    
+    );
+          
       
       }
    Reset()
    {  
     this.msg="";
- // this.btnAddCaption="Add";
- // this.Item.FirstName="";
-  //this.Item.LastName="";
-  //this.Item.EmpId="";
-  
+    this.btnAddCaption="Add";
+    /*this.Item.ProjectName="";
+    this.Item.Startdate=null;
+    this.Item.Enddate=null;
+    this.Item.Priority=null;
+    this.ProjMgrFirstandLastName="";
+    this.ProjMgrId=null;
+    $("#checkDates").prop("checked",false);
+    this.msg=""; */
    }
 
    Sort(orderby:string)
-
    {
     this.order=orderby;
    }

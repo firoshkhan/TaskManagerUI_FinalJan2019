@@ -97,6 +97,12 @@ tr {
   cursor: pointer;
 }
 
+.sucessMsg
+{
+
+color: rgb(221, 240, 221);
+background-color: rgb(91, 160, 100);
+}
 .button1 {border-radius: 2px;}
 .button2 {border-radius: 4px;}
 .button3 {border-radius: 8px;}

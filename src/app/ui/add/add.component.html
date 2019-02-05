@@ -116,11 +116,11 @@
     <div class="card">
     
         <div class="card-header page-header">
-          <h4>Add Task</h4>
+          <h4>Task</h4>
         </div>
 
         <div class="card-body cardbody">
-            <form name ="form" class="form-horizontal" 
+            <form id="ngForm" name ="form" class="form-horizontal" 
              (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group d-flex">
                 <div  class="col-sm-2 control-label"><label class="control-label" for="Task">Project : </label>
@@ -142,7 +142,7 @@
                   </div> 
                   <div class="col-sm-4">
                     <input type="text" class="form-control" [(ngModel)]="Item.TaskName"
-                       placeholder="Enter Task"  name="TaskName" #TaskName="ngModel"
+                       placeholder="Enter Task"  id="TaskName" name="TaskName" #TaskName="ngModel"
                        [ngClass]="{ 'is-invalid': f.submitted && TaskName.invalid }"
                        required  />
                        <div *ngIf="f.submitted && TaskName.invalid" class="invalid-feedback">
@@ -255,7 +255,7 @@
             
                     <div class="col-sm-4"></div>
                   <div>
-                    <button type="submit"  name="AddUpdate" class="btn btn-primary btn-sm">{{btnAddCaption}} </button> &nbsp;
+                    <button type="submit"  id="submit" name="AddUpdate" class="btn btn-primary btn-sm">{{btnAddCaption}} </button> &nbsp;
                   </div>
                     <div *ngIf="btnAddCaption  == 'Add'"> 
                       <a    (click)="Reset()" name="Reset"  class="btn btn-primary btn-sm">Reset Task</a>

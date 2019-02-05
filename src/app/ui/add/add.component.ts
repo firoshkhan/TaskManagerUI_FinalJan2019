@@ -44,7 +44,7 @@ ProjectName:string;
 btnAddCaption:string;
 Startdate:Date;
 Enddate:Date;
-
+Mode:string;
 error:any={isError:false,errorMessage:''};
 IsParenttask:boolean;
 ParentTaskId:number;
@@ -62,7 +62,8 @@ private datePipe: DatePipe;
   private _router: Router,private modalService: NgbModal) {
     this.Item=new Task();
     this.TaskId= this.activatedRoute.snapshot.paramMap.get('id');
-  //  console.log(" task id" + this.TaskId );
+    this.Mode= this.activatedRoute.snapshot.paramMap.get('mode');
+   console.log("mode" + this.Mode );
 
   }
 
@@ -169,7 +170,19 @@ private datePipe: DatePipe;
               {
 
               }
-          this.DisableForEditTask();         
+              if (this.TaskId != null) //update  mode  
+              {
+                 if (this.Mode == null)
+                 {
+                  this.DisableForEditTask() ;
+              
+                 }
+                else //view mode
+                {
+                this.DisableForViewTask();  
+           
+                } 
+              }  
             this.btnAddCaption="Update";
           }
         else //add
@@ -185,6 +198,19 @@ private datePipe: DatePipe;
         $("#userSearch").addClass("disabled");
         $("#projSearch").addClass("disabled");
         
+        $('form input[type="checkbox"]').prop("disabled", true);
+  }
+
+  DisableForViewTask()
+  {
+        //disable user and project pop up 
+        $("#userSearch").addClass("disabled");
+        $("#projSearch").addClass("disabled");     
+        $("#userParentTask").addClass("disabled");   
+        $("#ngForm :input").prop("disabled", true);   
+        $('#submit').prop("disabled", true); 
+       // $('form input[id="TaskName"]').prop("disabled", true);
+      //  $('form input[type="checkbox"]').prop("disabled", true);
         $('form input[type="checkbox"]').prop("disabled", true);
   }
   //Parent Task checkbox checked
@@ -231,7 +257,8 @@ private datePipe: DatePipe;
         this.Item.TaskUserId =this.UserId;
      
         this._service.Edit (this.Item)
-        .subscribe(i=>this.msg=i);    
+        .subscribe(i=>{this.task=i},(err) => {this.msg =err._body}); 
+       
         this.msg="Task Updated Sucessfully ! ";      
        // this.btnAddCaption="Add";
       }
@@ -247,10 +274,10 @@ private datePipe: DatePipe;
         this.Item.Startdate=this.Startdate;
 
         console.log(" task id" + this.TaskId );
-        this._service.Add(this.Item)
-        
-        .subscribe(i=>this.msg=i); 
-       
+        this._service.Add(this.Item)        
+      //  .subscribe(i=>this.msg=i); 
+        .subscribe(null,(err) => {this.msg =err._body}); 
+      
         this.msg="Task Added Sucessfully ! "; 
         }
     
@@ -287,14 +314,6 @@ private datePipe: DatePipe;
    // console.log(" this.Item.Enddate" + this.Item.Enddate);
     this.Startdate=this.Item.Startdate;
     this.Enddate=this.Item.Enddate;
-  //  let SDate = moment(this.Item.Startdate);
-    //let EDate = moment(this.Item.Enddate);
-    /*
-        if(SDate> EDate)    {    
-            this.error={isError:true,errorMessage:'Start date should be less than End date'};
-        } else{
-          this.error="";
-        }
-        */
+  
     }
 }
